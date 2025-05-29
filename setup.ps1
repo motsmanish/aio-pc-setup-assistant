@@ -7,7 +7,6 @@ $baseUrl = "https://raw.githubusercontent.com/motsmanish/aio-pc-setup-assistant/
 $scripts = @{
     "Tweaks"             = "tweaks.ps1"
     "Install Software"   = "install-software.ps1"
-    "Remove Bloatware"   = "remove-bloatware.ps1"
     "Exit"               = ""
 }
 

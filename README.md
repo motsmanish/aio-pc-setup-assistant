@@ -2,72 +2,65 @@
 
 A fully automated PowerShell-based setup assistant for fresh Windows installs. This tool helps you:
 
-- ✅ Install essential and developer software
-- 🧹 Remove bloatware and unwanted apps
-- 🛠 Apply system tweaks (like moving Downloads, enabling Hibernate, etc.)
+- ✅ Install essential and developer software  
+- 🛠 Apply system tweaks (like moving Downloads, enabling Hibernate, etc.)  
+- 🧹 Remove bloatware via a well-maintained external script
 
 ---
 
-## 🚀 One-Line Setup
+## 🚀 Quick Commands
 
-To run everything in one go, open PowerShell **as Administrator** and paste:
+Open PowerShell **as Administrator**, and run any of these individually:
+
+### 🛠️ System Tweaks
 
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force
-& ([scriptblock]::Create((irm "https://raw.githubusercontent.com/motsmanish/aio-pc-setup-assistant/main/setup.ps1")))
+& ([scriptblock]::Create((irm "https://raw.githubusercontent.com/motsmanish/aio-pc-setup-assistant/main/tweaks.ps1")))
 ```
 
-> 🟡 This will:
-> 1. Download the `setup.ps1` from GitHub
-> 2. Dynamically fetch and run additional modules (`tweaks`, `install-software`, `remove-bloatware`)
-> 3. Guide you through an interactive PC setup process
+> Enables Hibernate, classic context menu, sets "This PC" as default view, and more.
 
 ---
 
-## 📦 Modules
+### 📦 Install Essential Software
 
-### 🧰 `setup.ps1`
-Main entry script. Downloads and executes all other modules from GitHub.
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force
+& ([scriptblock]::Create((irm "https://raw.githubusercontent.com/motsmanish/aio-pc-setup-assistant/main/install-software.ps1")))
+```
 
-### 🔧 `tweaks.ps1`
-- Enable Hibernate
-- Move Downloads folder to D:\Downloads
-- Classic context menu (Windows 11)
-- Ungroup Taskbar icons (never combine mode)
-- Set “This PC” as default in Explorer
-- Show “This PC” on Desktop
-- Hide default folders (Documents/Music/etc)
-- Hide system recovery drive
-- And more...
+> Interactive menu to install browsers, dev tools, utilities via `winget` or direct URLs.
 
-### 📥 `install-software.ps1`
-Interactive UI to:
-- Select software to install (via `winget` or direct URLs)
-- Show progress and summaries
+---
 
-### 🧹 `remove-bloatware.ps1`
-Uninstalls common unwanted apps (e.g., Xbox, Copilot, Feedback Hub, Clipchamp, etc.)
-- Outputs a summary and writes to `D:\Downloads\uninstall-summary.txt`
+### 🧹 Remove Bloatware (External Script)
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force
+& ([scriptblock]::Create((irm "https://debloat.raphi.re/")))
+```
+
+> This runs the popular [Raphire/Win11Debloat](https://github.com/Raphire/Win11Debloat) script.  
+> We chose not to recreate this ourselves — it's well-tested and trusted.
 
 ---
 
 ## ✅ Requirements
 
-- Windows 10/11
-- PowerShell 5.1+ (built-in)
-- Internet connection
-- Run PowerShell as Administrator
+- Windows 10/11  
+- PowerShell 5.1+ (preinstalled)  
+- Internet connection  
+- Must be run as Administrator
 
 ---
 
-## 📂 Folder Structure
+## 📁 Folder Structure
 
 ```
 aio-pc-setup-assistant/
-├── setup.ps1                # Main entry point
 ├── tweaks.ps1               # System tweaks
-├── install-software.ps1     # App installation UI
-├── remove-bloatware.ps1     # Bloatware removal
+├── install-software.ps1     # Software installer
 └── README.md                # This file
 ```
 
@@ -75,27 +68,29 @@ aio-pc-setup-assistant/
 
 ## 🔐 Security
 
-All scripts run in memory unless explicitly downloaded. The `Bypass` scope is temporary and does **not** persist after the session ends.
+All scripts run in memory unless explicitly downloaded. The `Bypass` scope is temporary and does **not** persist beyond the current session.
 
 ---
 
 ## ✨ Credits
 
-Inspired by various Windows setup tools and custom workflows.
-Special thanks to [Raphire/Win11Debloat](https://github.com/Raphire/Win11Debloat) for the inspiration and powerful debloat script integration.
+Special thanks to:
 
-# Portions of this script are adapted from:
-# https://github.com/Raphire/Win11Debloat
-# Licensed under the MIT License
+- [Raphire/Win11Debloat](https://github.com/Raphire/Win11Debloat) — for their excellent bloatware removal script
+- The open source community for sharing awesome tools
+
+> Portions of this assistant are adapted or inspired by community scripts, and licensed appropriately.
+
+---
 
 ### ⚠️ Disclaimer
 
 This tool is provided **as-is** with no warranties or guarantees. It is intended for advanced users or clean installations where removing system apps and changing settings is acceptable.
 
-> 🛑 **Run at your own risk.**  
-> Always review scripts before execution, especially those that remove system components or modify the registry.
+> 🛑 **Use at your own risk.**  
+> Always review code before execution, especially anything that modifies system behavior.
 
 We recommend:
-- Testing in a VM or non-critical system first
-- Creating a system restore point
-- Reviewing each module (`tweaks.ps1`, `install-software.ps1`, etc.) before running
+- Testing in a VM or backup machine  
+- Creating a system restore point  
+- Reviewing each module (`tweaks.ps1`, `install-software.ps1`) before running
