@@ -82,3 +82,5 @@ All scripts run in memory unless explicitly downloaded. The `Bypass` scope is te
 ## ✨ Credits
 
 Inspired by various Windows setup tools and custom workflows.
+Special thanks to [Raphire/Win11Debloat](https://github.com/Raphire/Win11Debloat) for the inspiration and powerful debloat script integration.
+
