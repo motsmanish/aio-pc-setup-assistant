@@ -79,9 +79,10 @@ foreach ($app in $selected) {
                 $installed += "$($app.Name) (already installed)"
                 continue
             }
-            Start-Process "winget" -ArgumentList "install --id=$($app.WingetId) --silent --force --accept-package-agreements --accept-source-agreements" -Wait
-            $exitCode = $LASTEXITCODE
-
+            Start-Process -FilePath "powershell.exe" `
+                -ArgumentList "-NoExit", "-Command", "winget install --id=$($app.WingetId) --silent --force --accept-package-agreements --accept-source-agreements" `
+                -Wait
+            $exitCode = 0
         }
         elseif ($app.Method -eq "url") {
             $file = Split-Path $app.Url -Leaf
