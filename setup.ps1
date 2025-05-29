@@ -1,7 +1,7 @@
 Set-ExecutionPolicy Bypass -Scope Process -Force
 
 # Base URL of your GitHub repo
-$baseUrl = "https://raw.githubusercontent.com/motsmanish/aio-pc-setup-assistant/main/"
+$baseUrl = "https://raw.githubusercontent.com/motsmanish/aio-pc-setup-assistant/main"
 
 # List of script files in your repo
 $files = @(
