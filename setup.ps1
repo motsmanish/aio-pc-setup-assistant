@@ -3,21 +3,48 @@ Set-ExecutionPolicy Bypass -Scope Process -Force
 # Base URL of your GitHub repo
 $baseUrl = "https://raw.githubusercontent.com/motsmanish/aio-pc-setup-assistant/main"
 
-# List of script files in your repo
-$files = @(
-    "tweaks.ps1",
-    "install-software.ps1",
-    "remove-bloatware.ps1"
-)
-
-# Download and dot-source each script
-foreach ($file in $files) {
-    $localPath = "$env:TEMP\" + [IO.Path]::GetFileName($file)
-    Write-Host "`nFetching $file..." -ForegroundColor Cyan
-    Invoke-WebRequest "$baseUrl/$file" -OutFile $localPath
-    Write-Host "Running $file..."
-    . $localPath
+# Script list with friendly names and file paths
+$scripts = @{
+    "Tweaks"             = "tweaks.ps1"
+    "Install Software"   = "install-software.ps1"
+    "Remove Bloatware"   = "remove-bloatware.ps1"
+    "Exit"               = ""
 }
 
-Write-Host "`n✅ All modules loaded and executed." -ForegroundColor Green
-Read-Host "`nPress Enter to close"
+# Show menu
+function Show-Menu {
+    Clear-Host
+    Write-Host "`n==== AIO PC Setup Assistant ====" -ForegroundColor Cyan
+    $i = 1
+    $global:options = @{}
+    foreach ($key in $scripts.Keys) {
+        Write-Host "$i. $key"
+        $global:options[$i.ToString()] = $scripts[$key]
+        $i++
+    }
+    return Read-Host "`nChoose an option"
+}
+
+# Main loop
+do {
+    $choice = Show-Menu
+    $selectedScript = $options[$choice]
+
+    if ($selectedScript -and (Test-Path $selectedScript) -eq $false) {
+        $localPath = "$env:TEMP\" + [IO.Path]::GetFileName($selectedScript)
+        Write-Host "`nDownloading: $selectedScript..." -ForegroundColor Yellow
+        Invoke-WebRequest "$baseUrl/$selectedScript" -OutFile $localPath
+        Write-Host "Running: $selectedScript`n"
+        . $localPath
+    } elseif ($selectedScript) {
+        . $selectedScript
+    }
+
+    if (-not $selectedScript) {
+        break
+    }
+
+    Pause
+} while ($true)
+
+Write-Host "`nThank you for using PC Setup Assistant." -ForegroundColor Green
