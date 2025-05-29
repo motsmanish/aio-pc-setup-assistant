@@ -24,7 +24,7 @@ $apps = @(
     @{Name="PuTTY"; Method="winget"; WingetId="PuTTY.PuTTY"; Url=""},
     @{Name="Git"; Method="winget"; WingetId="Git.Git"; Url=""},
     @{Name="PHP"; Method="url"; WingetId=""; Url="https://windows.php.net/downloads/releases/php-8.2.19-Win32-vs16-x64.zip"},
-    @{Name="Python"; Method="url"; WingetId=""; Url="https://www.python.org/ftp/python/3.12.3/python-3.12.3-amd64.exe"},
+    @{Name="Python"; Method="url"; WingetId=""; Url="https://www.python.org/ftp/python/3.12.3/python-3.12.3-amd64.exe"}
 )
 
 # GUI to select apps
