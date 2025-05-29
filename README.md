@@ -88,3 +88,14 @@ Special thanks to [Raphire/Win11Debloat](https://github.com/Raphire/Win11Debloat
 # https://github.com/Raphire/Win11Debloat
 # Licensed under the MIT License
 
+### ⚠️ Disclaimer
+
+This tool is provided **as-is** with no warranties or guarantees. It is intended for advanced users or clean installations where removing system apps and changing settings is acceptable.
+
+> 🛑 **Run at your own risk.**  
+> Always review scripts before execution, especially those that remove system components or modify the registry.
+
+We recommend:
+- Testing in a VM or non-critical system first
+- Creating a system restore point
+- Reviewing each module (`tweaks.ps1`, `install-software.ps1`, etc.) before running
